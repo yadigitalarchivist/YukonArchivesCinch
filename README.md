@@ -1,3 +1,8 @@
+Yukon Archives fork of the CINCH Project
+========================================
+
+_The original CINCH was developed by the State Library of North Carolina and can be found here: http://cinch.nclive.org/Cinch/ _
+
 A project to develop a bulk download service to a central repository 
 that will maintain original file timestamps, extract file level metadata, 
 create file checksums and periodically validate checksums for continued file integrity. 
