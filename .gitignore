@@ -9,3 +9,4 @@ uploads/*
 curl_uploads/*
 ftp_uploads/*
 runtime/*
+log/*
