@@ -41,7 +41,7 @@ class MetadataCommand extends CConsoleCommand {
     const MP4 = 'video/mp4';
 	
 	public function __construct() {
-		$this->tika_path = Yii::getPathOfAlias('application') . '/tika-app-1.2.jar';
+		$this->tika_path = Yii::getPathOfAlias('application') . '/tika-app-1.4.jar';
 	}
 	
 	/**
