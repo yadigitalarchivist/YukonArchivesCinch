@@ -1,1 +1,1 @@
-placeholder so uploads directory will appear on github.
+Placeholder file so the directory will show up in GitHub.

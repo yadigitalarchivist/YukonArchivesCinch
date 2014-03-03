@@ -1,1 +1,1 @@
-place holder file so the directory will show up in get up.
+Placeholder file so the directory will show up in GitHub.
