@@ -249,17 +249,6 @@ CREATE TABLE IF NOT EXISTS `file_type` (
 ) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=13 ;
 
 --
--- Table structure for table `file_type`
---
-
-CREATE TABLE `file_type` (
-  `id` int(4) NOT NULL AUTO_INCREMENT,
-  `file_type` varchar(125) COLLATE utf8_unicode_ci NOT NULL,
-  `file_type_name` varchar(50) COLLATE utf8_unicode_ci NOT NULL,
-  PRIMARY KEY (`id`)
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci AUTO_INCREMENT=20 ;
-
---
 -- Dumping data for table `file_type`
 -- Note: Not all file types are actively used (OGG and MOV)
 --
