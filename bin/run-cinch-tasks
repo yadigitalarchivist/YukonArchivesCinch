@@ -1,0 +1,53 @@
+#!/bin/bash
+
+# Run all of the CINCH background tasks in the recommended order.
+# Log all output and errors to log/cinch-tasks.log.
+
+cinchroot="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd $cinchroot
+
+# Create the log directory if it doesn't already exist.
+if [[ ! -d log ]] ; then
+  mkdir log
+fi
+
+# Add a few blank lines to the log file unless it's empty.
+if [[ -s log/cinch-tasks.log ]] ; then
+  echo -e "\n\n" >>log/cinch-tasks.log
+fi
+
+# Note the date and time.
+date >>log/cinch-tasks.log
+
+echo READFILE
+php ./cron.php readfile >>log/cinch-tasks.log 2>&1
+
+echo DOWNLOAD
+php ./cron.php download >>log/cinch-tasks.log 2>&1
+
+echo VIRUSCHECK
+php ./cron.php viruscheck >>log/cinch-tasks.log 2>&1
+
+echo CHECKSUM CREATE
+php ./cron.php checksum create >>log/cinch-tasks.log 2>&1
+
+echo METADATA
+php ./cron.php metadata >>log/cinch-tasks.log 2>&1
+
+echo METADATACSV
+php ./cron.php metadatacsv >>log/cinch-tasks.log 2>&1
+
+echo CHECKSUM CHECK
+php ./cron.php checksum check >>log/cinch-tasks.log 2>&1
+
+echo ERRORCSV
+php ./cron.php errorcsv >>log/cinch-tasks.log 2>&1
+
+echo ZIPCREATION
+php ./cron.php zipcreation >>log/cinch-tasks.log 2>&1
+
+echo PURGESYSTEM CHECK
+php ./cron.php purgesystem check >>log/cinch-tasks.log 2>&1
+
+echo PURGESYSTEM DELETE
+php ./cron.php purgesystem delete >>log/cinch-tasks.log 2>&1

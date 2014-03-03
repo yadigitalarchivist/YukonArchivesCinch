@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Completely clear out the CINCH content directories.
+
+cinchroot="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd $cinchroot
+
+rm -fr assets/* 2>/dev/null 
+rm -fr protected/uploads/* 2>/dev/null
+rm -fr protected/runtime/* 2>/dev/null
+
+echo -n "Placeholder file so the directory will show up in GitHub." > assets/placeholder.txt
+cp assets/placeholder.txt protected/uploads/placeholder.txt
+cp assets/placeholder.txt protected/runtime/placeholder.txt

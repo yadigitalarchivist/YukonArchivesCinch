@@ -1,0 +1,10 @@
+#!/bin/bash
+
+# Set the necessary directory permissions to permit uploads and webserver-created files.
+
+cinchroot="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd $cinchroot
+
+chmod o+rwx assets
+chmod o+rwx protected/uploads
+chmod o+rwx protected/runtime

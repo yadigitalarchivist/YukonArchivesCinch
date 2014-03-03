@@ -1,0 +1,3 @@
+#!/bin/bash
+cinchbin="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
+mysql cinch <"${cinchbin}/drop-cinch-tables.sql"

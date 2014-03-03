@@ -1,0 +1,14 @@
+#!/bin/bash
+
+# Wipe out the CINCH content directories and database to their post-install state.
+
+cinchroot="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+cd $cinchroot
+
+# Wipe out the content directories. 
+bin/clear-cinch-content-directories
+bin/set-cinch-permissions
+
+# Rebuild the empty database (mysql password must be set in .my.cnf).
+bin/drop-cinch-tables
+mysql cinch <project.sql
