@@ -52,7 +52,7 @@ Setting up Cinch on your system:
 <li>In protected/config/console.php if the setting in date_default_timezone_set() isn't correct you should change it to your timezone setting.  For a complete list of timezone settings see: http://us2.php.net/manual/en/timezones.php.</li>
 <li>Go to http://tika.apache.org/download.html and download the Apache Tika jar file.</li>
 <li>Place the Apache Tika jar file at the root of the Cinch/protected directory.</li>
-<li>Configure Cinch cron tasks.  See the sample cron.txt file the root of Cinch for suggestions on how you might want to configure it.
+<li>Configure Cinch cron tasks.  See the sample cron.txt.original file the root of Cinch for suggestions on how you might want to configure it.
 </ol>
 You should now be able to login to the web interface as: admin admin.
 You should then go the change password tab and update your password.
