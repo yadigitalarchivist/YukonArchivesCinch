@@ -51,68 +51,82 @@
 
 <p>The original CINCH was developed by the State Library of North Carolina and can be found here: <a href="http://cinch.nclive.org/">http://cinch.nclive.org/</a></p>
 
-<p>A project to develop a bulk download service to a central repository 
-that will maintain original file timestamps, extract file level metadata, 
-create file checksums and periodically validate checksums for continued file integrity. </p>
+<p>A project to develop a bulk download service to a central repository that will maintain original file timestamps, extract file level metadata, create file checksums and periodically validate checksums for continued file integrity. </p>
 
-<p>Users merely need to upload a list of URLs to download and 
-when the process completes they can download the requested files and file metadata 
-to their local environment.</p>
+<p>Users merely need to upload a list of URLs to download and when the process completes they can download the requested files and file metadata to their local environment.</p>
 
 <p>Currently supported file types:</p>
 
 <ul>
 <li>PDF</li>
-<li>Microsoft Word</li>
-<li>Microsoft Excel</li>
-<li>Microsoft PowerPoint</li>
-<li>Jpeg</li>
+<li>Microsoft Word (.doc and .docx)</li>
+<li>Microsoft Excel (.xls and .xlsx)</li>
+<li>Microsoft PowerPoint (.ppt and .pptx)</li>
+<li>JPG</li>
 <li>PNG</li>
 <li>GIF</li>
-<li>Text (e.g. files with .txt, .csv extensions, etc.)</li>
+<li>Text (e.g. files with .txt, .csv extensions, etc.) Note that text files may be flagged as "problems".</li>
 </ul><p><a href="http://digitalpreservation.ncdcr.gov/cinch/" target="_blank">Learn more about CINCH</a>.</p>
 
 <p><a href="http://cinch.nclive.org/Cinch/CINCHdocumentation.pdf">Full end user instructions</a></p>
 
-<p>Funding for the CINCH: Capture, Ingest, &amp; Checksum tool is made possible through 
-an IMLS Sparks! Ignition grant.</p>
+<p>Funding for the CINCH: Capture, Ingest, &amp; Checksum tool was made possible through an IMLS Sparks! Ignition grant.</p>
+
+<p>License:  CINCH is released under the Unlicense (<a href="http://unlicense.org/">http://unlicense.org/</a>)</p>
 
 <h2>
-<a name="license--cinch-is-released-under-the-unlicense-httpunlicenseorg" class="anchor" href="#license--cinch-is-released-under-the-unlicense-httpunlicenseorg"><span class="octicon octicon-link"></span></a>License:  CINCH is released under the Unlicense (<a href="http://unlicense.org/">http://unlicense.org/</a>)</h2>
-
-<p>Requirements</p>
+<a name="requirements" class="anchor" href="#requirements"><span class="octicon octicon-link"></span></a>Requirements</h2>
 
 <ul>
-<li>Currently Cinch will only run on *nix systems</li>
-<li>PHP 5.3+ compiled with --enable-cli flag and curl module.  This is probably already setup in your package manager (PHP 5.4+ is recommended).</li>
-<li>MySQL</li>
+<li>Currently Cinch will only run on *nix systems. Yukon Archives recommends Ubuntu Server 12.04/14.04 LTS.</li>
+<li>PHP 5.3+</li>
+<li>MySQL 5.5+</li>
 <li>ClamAV</li>
-</ul><p>After download, you may need to run the setup.sh shell file before initially running application to set file level permissions.</p>
+<li>Java 6 JRE</li>
+</ul><p>If installing via <code>apt</code>, the specific packages, and their minimum acceptable versions are as follows:</p>
 
-<p>Setting up Cinch on your system:</p>
+<ul>
+<li>apache2-mpm-prefork 2.2.22+</li>
+<li>php5 5.3.10+</li>
+<li>php5-curl 5.3.10+</li>
+<li>php5-mysql 5.3.10+</li>
+<li>mysql-server 5.5.35+</li>
+<li>clamav-daemon 0.97.8+</li>
+<li>openjdk-6-jre 6b27-1.12.6+</li>
+<li>postfix 2.9.6-1+ or an equivalent MTA</li>
+</ul><h2>
+<a name="installation" class="anchor" href="#installation"><span class="octicon octicon-link"></span></a>Installation</h2>
+
+<p>To set up Cinch on your system:</p>
 
 <ol>
-<li>Place the Cinch files in a web accessible directory</li>
-<li>Create a new database MySQL database and import the project.sql file into it.</li>
-<li>Open protected/config/main.php</li>
-<li>Scroll down to the db settings (line 68 or so). Set the database name, the username and password for your new Cinch database.</li>
-<li>Scroll to the bottom of main.php and set 'adminEmail' email address to your email address.
-</li>
-<li>You'll now need to repeat steps four and five in protected/config/console.php.</li>
-<li>In protected/config/console.php if the setting in date_default_timezone_set() isn't correct you should change it to your timezone setting.  For a complete list of timezone settings see: http://us2.php.net/manual/en/timezones.php.</li>
-<li>Go to http://tika.apache.org/download.html and download the Apache Tika jar file.</li>
-<li>Place the Apache Tika jar file at the root of the Cinch/protected directory.</li>
-<li>Configure Cinch cron tasks.  See the sample cron.txt.original file the root of Cinch for suggestions on how you might want to configure it.
-</li>
-</ol><p>You should now be able to login to the web interface as: admin admin.
-You should then go the change password tab and update your password.</p>
+<li>Download or clone the Cinch files into a web accessible directory (e.g., <code>/var/www/</code>).</li>
+<li>Create a new MySQL database and import the project.sql file into it. Create a user for the Cinch application with full access to that database.</li>
+<li>Open <code>protected/config/main.php</code> in a text editor:
 
-<p>If you don't want to run Cinch via cron you can run it from the command line.  If you navigate to Cinch/protected and run the following: path/to/php yiic.php you should be presented with a list of available commands.  The general way to run a command is: path/to/php yiic.php command.
+<ol>
+<li>Scroll down to the db settings (line 68 or so). Set the database name, the username and password for your new Cinch database.</li>
+<li>Scroll to the bottom of main.php and set 'adminEmail' email address to your email address.</li>
+</ol>
+</li>
+<li>Repeat the previous step for <code>protected/config/console.php</code>.</li>
+<li>In <code>protected/config/console.php</code> if the setting in date_default_timezone_set() isn't correct you should change it to your timezone setting. For a complete list of timezone settings see: <a href="http://us2.php.net/manual/en/timezones.php">http://us2.php.net/manual/en/timezones.php</a>.</li>
+<li>Go to <a href="http://tika.apache.org/download.html">http://tika.apache.org/download.html</a> and download the Apache Tika jar file. Copy it to the <code>protected/</code> directory. For now, Cinch expects version 1.4 of Tika.</li>
+<li>Run the <code>bin/set-cinch-permissions</code> script to apply the required permissions to the uploaded files directories.</li>
+<li>Configure Cinch cron tasks. See the sample cron.txt.original file the root of Cinch for suggestions on how you might want to configure it. It is advised to create a special OS-level user account to run these tasks. That account must have write permissions on the <code>protected/curl_downloads/</code> directory.</li>
+<li>In the <code>/etc/cron.daily/</code> directory, add a symbolic link to <code>/usr/bin/freshclam</code> so that it will be run by root once each day.</li>
+</ol><p>You should now be able to login to the web interface as: admin admin.</p>
+
+<p>You should then go the change password tab and update your password.</p>
+
+<p>If you don't want to run Cinch via cron you can run it from the command line.
+If you navigate to Cinch/protected and run the following: path/to/php yiic.php you should be presented with a list of available commands.
+The general way to run a command is: path/to/php yiic.php command.
 Several commands such as checksum and purgeystem have subcommands, which have to be run like so from the command line: path/to/php yiic.php command sub-command.</p>
 
 <p>You should run the commands in the following order:</p>
 
-<ol>
+<ul>
 <li>readfile</li>
 <li>download</li>
 <li>viruscheck</li>
@@ -123,26 +137,28 @@ Several commands such as checksum and purgeystem have subcommands, which have to
 <li>errorcsv</li>
 <li>zipcreation</li>
 <li>purgesystem check (optional, Notifies users after 20 days that they have files marked for deletion in 10 days.)</li>
-<li>purgesystem delete (optional, deletes user files older than 30 days old.  Note this deletes upload lists, and all csv file information from the database, but downloaded file, metadata, errors, and event information is retained in the database.)</li>
-</ol><p>Useful Notes:  </p>
+<li>purgesystem delete (optional, deletes user files older than 30 days old. Note this deletes upload lists, and all csv file information from the database, but downloaded file, metadata, errors, and event information is retained in the database.)</li>
+</ul><p>You may also run all of the tasks in order in one step using the <code>bin/run-cinch-tasks</code> script.</p>
+
+<h2>
+<a name="useful-notes" class="anchor" href="#useful-notes"><span class="octicon octicon-link"></span></a>Useful Notes</h2>
 
 <ul>
 <li>You should only run the zipcreation command once a day otherwise it will cause conflicts in file processing.</li>
-<li>Uploaded url lists are saved into protected/uploads/"user's username". With the user's directory being created on first upload and being deleted thereafter if it's empty.</li>
+<li>Uploaded URL lists are saved into protected/uploads/"user's username". With the user's directory being created on first upload and being deleted thereafter if it's empty.</li>
 <li>Downloaded user files are saved  into protected/curl_downloads/"user's username". With the user's directory being created on first file downloaded and being deleted thereafter if it's empty.</li>
 <li>CINCH API documentation can be viewed at: <a href="http://cinch.nclive.org/c_docs/packages/db_Default.html">http://cinch.nclive.org/c_docs/packages/db_Default.html</a>.</li>
 </ul><p>Adding New Users:</p>
 
-<p>Currently users can't self-register (This fit our own particular needs.)</p>
+<p>Currently users can't self-register (This fits our own particular needs.)</p>
 
-<ul>
-<li>Login as user with admin privileges.  The default "admin" user has admin privileges already setup.</li>
-<li>Then go to Admin-&gt;User Administration-&gt;Create User and add the user. (The user will be sent an email with their username and password.  Users may then login and change their password.)</li>
-<li>Next go to Admin-&gt;User Rights.  Click the user's username and then select the privileges you want them to have.</li>
-<li>You've now successfully added a user.</li>
-</ul><p>If you have problems with setting up users feel free to contact us.  You might want to take a look at the documentation for the Yii Rights extension used in CINCH: <a href="http://yii-rights.googlecode.com/files/yii-rights-doc-1.2.0.pdf">http://yii-rights.googlecode.com/files/yii-rights-doc-1.2.0.pdf</a></p>
+<ol>
+<li>Login as a user with admin privileges such as the default "admin" user account.</li>
+<li>Go to Admin &gt; User Administration-&gt;Create User and add the user. The user will be sent an email with their username and password. Users may then login and change their password.</li>
+<li>Go to Admin &gt; User Rights. Click the user's username and assign the "Authenticated" role.</li>
+</ol><p>You might want to take a look at the documentation for the Yii Rights extension used in CINCH: <a href="http://yii-rights.googlecode.com/files/yii-rights-doc-1.2.0.pdf">http://yii-rights.googlecode.com/files/yii-rights-doc-1.2.0.pdf</a></p>
 
-<hr><p>Parts of Cinch include:</p>
+<p>Parts of Cinch include:</p>
 
 <ul>
 <li>Yii Framework <a href="http://www.yiiframework.com">http://www.yiiframework.com</a>
