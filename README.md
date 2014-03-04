@@ -108,8 +108,8 @@ You might want to take a look at the documentation for the Yii Rights extension 
 
 Parts of Cinch include:
 
-- Yii Framework <http://www.yiiframework.com>
-- jQuery <http://jquery.com>
-- jQuery UI <http://jqueryui.com>
-- Apache Tika <http://tika.apache.org>
-- ClamAV <http://www.clamav.net>
+* Yii Framework <http://www.yiiframework.com>
+* jQuery <http://jquery.com>
+* jQuery UI <http://jqueryui.com>
+* Apache Tika <http://tika.apache.org>
+* ClamAV <http://www.clamav.net>
