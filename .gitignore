@@ -2,7 +2,7 @@ assets/*
 log/*
 protected/config/console.php
 protected/config/main.php
-protected/curl_uploads/*
+protected/curl_downloads/*
 protected/runtime/*
 protected/tika-app-*.jar
 protected/uploads/*
