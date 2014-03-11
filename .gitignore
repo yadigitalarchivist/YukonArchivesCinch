@@ -1,3 +1,4 @@
+.idea
 assets/*
 log/*
 protected/config/console.php
