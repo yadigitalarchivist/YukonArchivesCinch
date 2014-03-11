@@ -24,12 +24,12 @@ Currently supported file types:
 
 Funding for the CINCH: Capture, Ingest, & Checksum tool was made possible through an IMLS Sparks! Ignition grant.
 
-License:  CINCH is released under the Unlicense (http://unlicense.org/)
+License: CINCH is released under the Unlicense (http://unlicense.org/)
 
 Requirements
 ------------
 
-* Currently Cinch will only run on *nix systems. Yukon Archives recommends Ubuntu Server 12.04/14.04 LTS.
+* Currently CINCH will only run on *nix systems. Yukon Archives recommends Ubuntu Server 12.04/14.04 LTS.
 * PHP 5.3+
 * MySQL 5.5+
 * ClamAV
@@ -49,42 +49,42 @@ If installing via `apt`, the specific packages, and their minimum acceptable ver
 Installation
 ------------
 
-To set up Cinch on your system:
+To set up CINCH on your system:
 
-1. Download or clone the Cinch files into a web accessible directory (e.g., `/var/www/`).
-1. Create a new MySQL database and import the project.sql file into it. Create a user for the Cinch application with full access to that database.
+1. Download or clone the CINCH files into a web accessible directory (e.g., `/var/www/`).
+1. Create a new MySQL database and import the project.sql file into it. Create a user for the CINCH application with full access to that database.
 1. Open `protected/config/main.php` in a text editor:
- 1. Scroll down to the db settings (line 68 or so). Set the database name, the username and password for your new Cinch database.
+ 1. Scroll down to the db settings (line 68 or so). Set the database name, the username and password for your new CINCH database.
  1. Scroll to the bottom of main.php and set 'adminEmail' email address to your email address.
 1. Repeat the previous step for `protected/config/console.php`.
 1. In `protected/config/console.php` if the setting in date_default_timezone_set() isn't correct you should change it to your timezone setting. For a complete list of timezone settings see: http://us2.php.net/manual/en/timezones.php.
-1. Go to http://tika.apache.org/download.html and download the Apache Tika jar file. Copy it to the `protected/` directory. For now, Cinch expects version 1.4 of Tika.
+1. Go to http://tika.apache.org/download.html and download the Apache Tika jar file. Copy it to the `protected/` directory. For now, CINCH expects version 1.4 of Tika.
 1. Run the `bin/set-cinch-permissions` script to apply the required permissions to the uploaded files directories.
-1. Configure Cinch cron tasks. See the sample cron.txt.original file the root of Cinch for suggestions on how you might want to configure it. It is advised to create a special OS-level user account to run these tasks. That account must have write permissions on the `protected/curl_downloads/` directory.
+1. Configure CINCH cron tasks. See the sample cron.txt.original file the root of CINCH for suggestions on how you might want to configure it. It is advised to create a special OS-level user account to run these tasks. That account must have write permissions on the `protected/curl_downloads/` directory.
 1. In the `/etc/cron.daily/` directory, add a symbolic link to `/usr/bin/freshclam` so that it will be run by root once each day.
 
 You should now be able to login to the web interface as: admin admin.
 
 You should then go the change password tab and update your password.
 
-If you don't want to run Cinch via cron you can run it from the command line.
-If you navigate to Cinch/protected and run the following: path/to/php yiic.php you should be presented with a list of available commands.
-The general way to run a command is: path/to/php yiic.php command.
-Several commands such as checksum and purgeystem have subcommands, which have to be run like so from the command line: path/to/php yiic.php command sub-command.
+If you don't want to run CINCH via cron you can run it from the command line.
+If you navigate to `protected/` and run the following: `php yiic.php` you should be presented with a list of available commands.
+The general way to run a command is (assuming `php` is in the path): `php yiic.php <command>`.
+Several commands such as checksum and purgeystem have subcommands, which have to be run like so from the command line: `php yiic.php <command> <sub-command>`.
 
 You should run the commands in the following order:
 
-* readfile
-* download
-* viruscheck
-* checksum create
-* metadata
-* metadatacsv
-* checksum check (optional, recalculates checksum to see if anything has changed between download and current time.)
-* errorcsv
-* zipcreation
-* purgesystem check (optional, Notifies users after 20 days that they have files marked for deletion in 10 days.)
-* purgesystem delete (optional, deletes user files older than 30 days old. Note this deletes upload lists, and all csv file information from the database, but downloaded file, metadata, errors, and event information is retained in the database.)
+* `readfile`
+* `download`
+* `viruscheck`
+* `checksum create`
+* `metadata`
+* `metadatacsv`
+* `checksum check` (optional, recalculates checksum to see if anything has changed between download and current time.)
+* `errorcsv`
+* `zipcreation`
+* `purgesystem check` (optional, Notifies users after 20 days that they have files marked for deletion in 10 days.)
+* `purgesystem delete` (optional, deletes user files older than 30 days old. Note this deletes upload lists, and all csv file information from the database, but downloaded file, metadata, errors, and event information is retained in the database.)
 
 You may also run all of the tasks in order in one step using the `bin/run-cinch-tasks` script.
 
@@ -92,8 +92,8 @@ Useful Notes
 ------------  
 
 * You should only run the zipcreation command once a day otherwise it will cause conflicts in file processing.
-* Uploaded URL lists are saved into protected/uploads/"user's username". With the user's directory being created on first upload and being deleted thereafter if it's empty.
-* Downloaded user files are saved  into protected/curl_downloads/"user's username". With the user's directory being created on first file downloaded and being deleted thereafter if it's empty.
+* Uploaded URL lists are saved into `protected/uploads/<username>`. With the user's directory being created on first upload and being deleted thereafter if it's empty.
+* Downloaded user files are saved  into `protected/curl_downloads/<username>`. With the user's directory being created on first file downloaded and being deleted thereafter if it's empty.
 * CINCH API documentation can be viewed at: http://cinch.nclive.org/c_docs/packages/db_Default.html.
 
 Adding New Users:
@@ -106,7 +106,7 @@ Currently users can't self-register (This fits our own particular needs.)
 
 You might want to take a look at the documentation for the Yii Rights extension used in CINCH: http://yii-rights.googlecode.com/files/yii-rights-doc-1.2.0.pdf
 
-Parts of Cinch include:
+Parts of CINCH include:
 
 * Yii Framework <http://www.yiiframework.com>
 * jQuery <http://jquery.com>
